@@ -37,9 +37,10 @@ Administratorius galės:
 ## Technologijos
 
 Front: React
-Back: .net 7 
+Back: .net 7
 Db: MySqlServer
 
 ## Sistemos architektūra
 
+![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a9004d55-5765-4031-b7dd-647c228fec73)
 
