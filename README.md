@@ -36,9 +36,9 @@ Administratorius galės:
 
 ## Technologijos
 
-Front: React
-Back: .net 7
-Db: MySqlServer
+Front: React  
+Back: .net 7  
+Db: MySqlServer  
 
 ## Sistemos architektūra
 
