@@ -12,11 +12,6 @@ temose bei komentuoti po esamais įrašais. Administratorius moderuotu forumą, 
 
 ## Funkciniai reikalavimai
 
-### Neregistruotas/neprisijungias sistemos naudotojas:
-
-1. Prisijungti/užsiregistruoti prie platformos.
-2. Peržiūrėti temas ir įrašus.
-
 ### API metodai:
 
 - Kurti/skaityti/keisti/trinti temą ir gauti visų temų sarašą.
@@ -28,7 +23,12 @@ temose bei komentuoti po esamais įrašais. Administratorius moderuotu forumą, 
 - Svečias
 - Administratorius
 - Registruotas naudotojas
- 
+
+### Neregistruotas/neprisijungias sistemos naudotojas:
+
+1. Prisijungti/užsiregistruoti prie platformos.
+2. Peržiūrėti temas ir įrašus.
+
 ### Registruotas/prisijungias sistemos naudotojas:
 
 1. Atsijungti
