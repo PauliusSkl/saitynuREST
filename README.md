@@ -52,6 +52,7 @@ Front: React
 Back: .NET 7 + MySqlServer 
 
 ## Sistemos architektūra
+![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/c0a6aba7-dc4f-4705-b697-e068c65346fd)
 
 ![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a9004d55-5765-4031-b7dd-647c228fec73)
 
