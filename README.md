@@ -54,7 +54,8 @@ Back: .NET 7 + MySqlServer
 ## Sistemos architektūra
 
 
-![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/e4f7b427-da18-4df1-83f1-353322e782e3)
+![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a8a50bcb-5698-471d-9237-79e4fd3d87ba)
+
 
 
 
