@@ -56,8 +56,3 @@ Back: .NET 7 + MySqlServer
 
 ![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a8a50bcb-5698-471d-9237-79e4fd3d87ba)
 
-
-
-
-![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a9004d55-5765-4031-b7dd-647c228fec73)
-
