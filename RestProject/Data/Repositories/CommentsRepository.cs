@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestProject.Data.Dtos.Comments;
 using RestProject.Data.Entities;
+using RestProject.Helpers;
 
 namespace RestProject.Data.Repositories
 {
@@ -7,6 +9,8 @@ namespace RestProject.Data.Repositories
     {
         Task CreateAsync(Comment comment);
         Task<IEnumerable<Comment>> GetManyAsync(int topicId, int postId);
+
+        Task<PagedList<Comment>> GetManyAsync(int topicId, int postId, CommentSearchParameters searchParameters);
 
         Task<Comment?> GetAsync(int topicId, int postId, int commentId);
 
@@ -29,6 +33,14 @@ namespace RestProject.Data.Repositories
         {
             return await _forumDbContext.Comments.Where(o => o.Post.Id == postId && o.Post.Topic.Id == topicId).ToListAsync();
         }
+
+        public async Task<PagedList<Comment>> GetManyAsync(int topicId, int postId, CommentSearchParameters searchParameters)
+        {
+            var queryable = _forumDbContext.Comments.Where(o => o.Post.Id == postId && o.Post.Topic.Id == topicId).AsQueryable().OrderBy(o => o.CreationDate);
+
+            return await PagedList<Comment>.CreateAsync(queryable, searchParameters.PageNumber, searchParameters.PageSize);
+        }
+
 
         public async Task CreateAsync(Comment comment)
         {
