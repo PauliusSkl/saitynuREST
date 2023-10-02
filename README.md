@@ -12,12 +12,24 @@ temose bei komentuoti po esamais įrašais. Administratorius moderuotu forumą, 
 
 ## Funkciniai reikalavimai
 
-Neregistruotas/neprisijungias sistemos naudotojas:
+### API metodai:
+
+- Kurti/skaityti/keisti/trinti temą ir gauti visų temų sarašą.
+- Kurti/skaityti/keisti/trinti įrašą ir gauti visų įrašų sarašą.
+- Kurti/skaityti/keisti/trinti komentarą ir gauti visų komentarų sarašą.
+
+### Rolės:
+
+- Svečias
+- Administratorius
+- Registruotas naudotojas
+
+### Neregistruotas/neprisijungias sistemos naudotojas:
 
 1. Prisijungti/užsiregistruoti prie platformos.
 2. Peržiūrėti temas ir įrašus.
 
-Registruotas/prisijungias sistemos naudotojas:
+### Registruotas/prisijungias sistemos naudotojas:
 
 1. Atsijungti
 2. Sukurti temą.
@@ -29,7 +41,7 @@ Registruotas/prisijungias sistemos naudotojas:
 8. Peržiūrėti kitų naudotojų informaciją.
 9. Šalinti savo sukurtas temas, įrašus, komentarus.
 
-Administratorius galės:
+### Administratorius galės:
 
 1. Šalinti bet kokia temą, įrašą, komentarą.
 2. Šalinti naudotojus.
@@ -37,10 +49,10 @@ Administratorius galės:
 ## Technologijos
 
 Front: React  
-Back: .net 7  
-Db: MySqlServer  
+Back: .NET 7 + MySqlServer 
 
 ## Sistemos architektūra
 
-![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a9004d55-5765-4031-b7dd-647c228fec73)
+
+![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a8a50bcb-5698-471d-9237-79e4fd3d87ba)
 
