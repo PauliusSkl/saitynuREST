@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using RestProject.Auth.Model;
 using RestProject.Data.Entities;
 namespace RestProject.Data
 {
-    public class ForumDbContext : DbContext
+    public class ForumDbContext : IdentityDbContext<ForumRestUser>
     {
         public DbSet<Topic> Topics { get; set; }
 

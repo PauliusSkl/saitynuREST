@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RestProject.Auth.Model;
 using RestProject.Data;
 using RestProject.Data.Dtos.Topics;
 using RestProject.Data.Entities;
 using RestProject.Data.Repositories;
+using System.Security.Claims;
 using System.Text.Json;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace RestProject.Controllers
 {
@@ -12,10 +16,12 @@ namespace RestProject.Controllers
     public class TopicsController : ControllerBase
     {
         private readonly ITopicsRepository _topicsRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public TopicsController(ITopicsRepository topicsRepository)
+        public TopicsController(ITopicsRepository topicsRepository, IAuthorizationService authorizationService)
         {
             _topicsRepository = topicsRepository;
+            _authorizationService = authorizationService;
         }
 
         //automapper
@@ -76,10 +82,15 @@ namespace RestProject.Controllers
             //return new TopicDto(topic.Id, topic.Name, topic.Description, topic.CreationDate);
         }
 
+
         [HttpPost(Name ="CreateTopic")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult<TopicDto>> Create(CreateTopicDto createTopicDto)
         {
-            var topic = new Topic { Name = createTopicDto.name, Description = createTopicDto.Description, CreationDate = DateTime.UtcNow };
+            var topic = new Topic { Name = createTopicDto.name, Description = createTopicDto.Description,
+                CreationDate = DateTime.UtcNow,
+                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+            };
 
             await _topicsRepository.CreateAsync(topic);
 
@@ -89,6 +100,7 @@ namespace RestProject.Controllers
         }
 
         [HttpPut("{topicId}", Name = "UpdateTopic")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult<TopicDto>> Update(int topicId, UpdateTopicDto updateTopicDto)
         {
 
@@ -97,6 +109,13 @@ namespace RestProject.Controllers
             if (topic == null)
             {
                 return NotFound();
+            }
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, topic, PolicyNames.ResourceOwner);
+            if (!authorizationResult.Succeeded)
+            {
+                // 404
+                return Forbid();
             }
 
             topic.Description = updateTopicDto.Description;
