@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
+using RestProject.Auth.Model;
 using RestProject.Data;
 using RestProject.Data.Dtos.Posts;
 using RestProject.Data.Entities;
 using RestProject.Data.Repositories;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace RestProject.Controllers
@@ -13,11 +17,13 @@ namespace RestProject.Controllers
     {
         private readonly IPostsRepository _postsRepository;
         private readonly ITopicsRepository _topicsRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public PostController(IPostsRepository postsRepository, ITopicsRepository topicsRepository)
+        public PostController(IPostsRepository postsRepository, ITopicsRepository topicsRepository, IAuthorizationService authorizationService)
         {
             _postsRepository = postsRepository;
             _topicsRepository = topicsRepository;
+            _authorizationService = authorizationService;
         }
 
         //[HttpGet(Name = "GetPosts")]
@@ -53,6 +59,7 @@ namespace RestProject.Controllers
         }
 
         [HttpPost(Name ="CreatePost")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult<PostDto>> Create(int topicId, CreatePostDto createPostDto)
         {
 
@@ -61,7 +68,11 @@ namespace RestProject.Controllers
             {
                 return NotFound();
             }
-            var post = new Post { Name = createPostDto.Name, Body = createPostDto.Body, CreationDate = DateTime.Now , Topic = topic};
+
+            var post = new Post { Name = createPostDto.Name, Body = createPostDto.Body, CreationDate = DateTime.Now,
+                Topic = topic,
+                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+            };
 
             await _postsRepository.CreateAsync(post);
 
@@ -97,6 +108,12 @@ namespace RestProject.Controllers
                 return NotFound();
             }
 
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
+
             await _postsRepository.DeleteAsync(post);
 
             return NoContent();
@@ -104,6 +121,7 @@ namespace RestProject.Controllers
         }
 
         [HttpPut("{postId}", Name ="UpdatePost")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult<PostDto>> Update(int topicId, int postId, UpdatePostDto updatePostDto)
         {
             var post = await _postsRepository.GetAsync(postId, topicId);
@@ -111,6 +129,12 @@ namespace RestProject.Controllers
             if (post == null)
             {
                 return NotFound();
+            }
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
             }
 
             post.Body = updatePostDto.Body;

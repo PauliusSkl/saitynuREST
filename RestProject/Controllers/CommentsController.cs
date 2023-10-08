@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
+using RestProject.Auth.Model;
 using RestProject.Data;
 using RestProject.Data.Dtos.Comments;
 using RestProject.Data.Dtos.Posts;
 using RestProject.Data.Entities;
 using RestProject.Data.Repositories;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace RestProject.Controllers
@@ -14,11 +18,13 @@ namespace RestProject.Controllers
     {
         private readonly ICommentsRepository _commentsRepository;
         private readonly IPostsRepository _postsRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public CommentsController(ICommentsRepository commentsRepository, IPostsRepository postsRepository)
+        public CommentsController(ICommentsRepository commentsRepository, IPostsRepository postsRepository, IAuthorizationService authorizationService)
         {
             _commentsRepository = commentsRepository;
             _postsRepository = postsRepository;
+            _authorizationService = authorizationService;
         }
 
         [HttpGet(Name = "GetComments")]
@@ -55,6 +61,7 @@ namespace RestProject.Controllers
         //}
 
         [HttpPost(Name ="CreateComment")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult<CommentDto>> Create(int topicId, int postId, CreateCommentDto createCommentDto)
         {
  
@@ -64,7 +71,10 @@ namespace RestProject.Controllers
                 return NotFound();
             }
 
-            var comment = new Comment { Content = createCommentDto.Content, CreationDate = DateTime.Now, Post = post };
+            var comment = new Comment { Content = createCommentDto.Content, CreationDate = DateTime.Now,
+                Post = post,
+                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
+            };
 
             await _commentsRepository.CreateAsync(comment);
             return Created("", new CommentDto(comment.Id, comment.Content, comment.CreationDate));
@@ -88,6 +98,7 @@ namespace RestProject.Controllers
         }
 
         [HttpPut("{commentId}", Name ="UpdateComment")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult<CommentDto>> Update(int topicId, int postId, int commentId, UpdateCommentDto updateCommentDto)
         {
             var comment = await _commentsRepository.GetAsync(topicId, postId, commentId);
@@ -95,6 +106,12 @@ namespace RestProject.Controllers
             if (comment == null)
             {
                 return NotFound();
+            }
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.ResourceOwner);
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
             }
 
             comment.Content = updateCommentDto.Content;
@@ -106,6 +123,7 @@ namespace RestProject.Controllers
         }
 
         [HttpDelete("{commentId}", Name ="DeleteComment")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult> Remove(int topicId, int postId, int commentId)
         {
             var comment = await _commentsRepository.GetAsync(topicId, postId, commentId);
@@ -114,7 +132,12 @@ namespace RestProject.Controllers
             {
                 return NotFound();
             }
-
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.ResourceOwner);
+            if (!authorizationResult.Succeeded)
+            {
+                
+                return Forbid();
+            }
             await _commentsRepository.DeleteAsync(comment);
 
             return NoContent();

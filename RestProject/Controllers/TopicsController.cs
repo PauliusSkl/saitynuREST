@@ -126,6 +126,7 @@ namespace RestProject.Controllers
 
 
         [HttpDelete("{topicId}", Name = "DeleteTopic")]
+        [Authorize(Roles = ForumRoles.registeredUser)]
         public async Task<ActionResult> Remove(int topicId)
         {
             var topic = await _topicsRepository.GetAsync(topicId);
@@ -134,6 +135,13 @@ namespace RestProject.Controllers
             {
                 return NotFound();
             }
+
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, topic, PolicyNames.ResourceOwner);
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
+
 
             await _topicsRepository.DeleteAsync(topic);
 
