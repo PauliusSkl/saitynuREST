@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5RYYhZbFitjEfn/NAzLE9Tb2EemgIBi/MzYeBQYVYteLuRPu9A5WRdA04xIWauRrZChy7WMK/ywflpmRj+bKTw==",
+  "dgSpecHash": "RYmKcOsKD+QLgBYYIFQ516mjFN+2g3HJLdBYAzCSiAdSvbouRlSsFG73t6mZwHHSvvR6vD7Omp2wHFz/F34Vpw==",
   "success": true,
   "projectFilePath": "D:\\Dekstop\\SAITYNAI\\RestProject\\RestProject\\RestProject.csproj",
   "expectedPackageFiles": [
@@ -64,6 +64,7 @@
     "C:\\Users\\Paulius\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\Paulius\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Paulius\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\Paulius\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.4\\microsoft.visualstudio.azure.containers.tools.targets.1.19.4.nupkg.sha512",
     "C:\\Users\\Paulius\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\Paulius\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Paulius\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
