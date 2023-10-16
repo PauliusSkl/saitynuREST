@@ -1,6 +1,6 @@
 # https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
-WORKDIR /
+WORKDIR /source
 # copy csproj and restore as distinct layers
 COPY RestProject/*.csproj .
 RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
