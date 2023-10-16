@@ -1,17 +1,24 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RestProject.Auth.Model;
 using RestProject.Data.Entities;
 namespace RestProject.Data
 {
     public class ForumDbContext : IdentityDbContext<ForumRestUser>
     {
+
+        private readonly IConfiguration _configuration;
         public DbSet<Topic> Topics { get; set; }
 
         public DbSet<Post> Posts { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
 
+        public ForumDbContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Post>()
@@ -33,7 +40,7 @@ namespace RestProject.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=ForumDb2");
+            optionsBuilder.UseNpgsql(_configuration.GetValue<string>("PostgreSQLConnectionString"));
         }
 
     }
