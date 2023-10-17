@@ -115,7 +115,7 @@ namespace RestProject.Controllers
             }
 
             comment.Content = updateCommentDto.Content;
-            comment.CreationDate = DateTime.Now;
+            comment.CreationDate = DateTime.UtcNow;
 
             await _commentsRepository.UpdateAsync(comment);
 
