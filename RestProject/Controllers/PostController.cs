@@ -69,7 +69,7 @@ namespace RestProject.Controllers
                 return NotFound();
             }
 
-            var post = new Post { Name = createPostDto.Name, Body = createPostDto.Body, CreationDate = DateTime.Now,
+            var post = new Post { Name = createPostDto.Name, Body = createPostDto.Body, CreationDate = DateTime.UtcNow,
                 Topic = topic,
                 UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
             };

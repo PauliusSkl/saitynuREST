@@ -71,7 +71,7 @@ namespace RestProject.Controllers
                 return NotFound();
             }
 
-            var comment = new Comment { Content = createCommentDto.Content, CreationDate = DateTime.Now,
+            var comment = new Comment { Content = createCommentDto.Content, CreationDate = DateTime.UtcNow,
                 Post = post,
                 UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
             };
