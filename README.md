@@ -56,3 +56,59 @@ Back: .NET 7 + MySqlServer
 
 ![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a8a50bcb-5698-471d-9237-79e4fd3d87ba)
 
+
+# API specifikacija
+
+### GET api/topics
+
+Grąžina temas. Temos gražinamos po dvi puslapiais. Rezultatai gali būti naviguojami su `pageNumber` arba puslapio dydis padidinamas su `pageSize`
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | topic id | | 1|
+| name |  | topic name| | topic|
+| description |  | topic description| | topic about animals|
+| creationDate |  | topic created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+GET https://walrus-app-2r2tj.ondigitalocean.app/api/topics
+```
+
+### Atsakas
+
+```http
+Status 200
+[
+    {
+        "id": 2,
+        "name": "Topic1",
+        "description": "First topic",
+        "creationDate": "2023-10-17T15:16:45.64501Z"
+    },
+    {
+        "id": 3,
+        "name": "Topic2",
+        "description": "Second topic",
+        "creationDate": "2023-10-17T17:31:26.546829Z"
+    }
+]
+```
+
+
+
