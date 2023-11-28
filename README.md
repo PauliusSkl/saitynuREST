@@ -59,7 +59,9 @@ Back: .NET 7 + MySqlServer
 
 # API specifikacija
 
-### GET api/topics
+## Temos
+
+## GET api/topics
 
 Grąžina temas. Temos gražinamos po dvi puslapiais. Rezultatai gali būti naviguojami su `pageNumber` arba puslapio dydis padidinamas su `pageSize`
 
@@ -110,7 +112,73 @@ Status 200
 ]
 ```
 
-### POST api/topics
+## GET api/topics/:id
+
+Grąžina specifinę tema kaip `resource` ir `links` kurie parodo, ką galima atlikti su resursu.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | topic id | | 1|
+| name |  | topic name| | topic|
+| description |  | topic description| | topic about animals|
+| creationDate |  | topic created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+GET https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "resource": {
+        "id": 2,
+        "name": "Topic1",
+        "description": "First topic",
+        "creationDate": "2023-10-17T15:16:45.64501Z"
+    },
+    "links": [
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2",
+            "rel": "self",
+            "method": "GET"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2",
+            "rel": "DeleteTopic",
+            "method": "DELETE"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2",
+            "rel": "UpdateTopic",
+            "method": "PUT"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts",
+            "rel": "GetPosts",
+            "method": "GET"
+        }
+    ]
+```
+
+## POST api/topics
 
 Sukuria nauja temą.
 
@@ -159,7 +227,7 @@ Status 200
     "creationDate": "2023-11-28T17:05:29.7266917Z"
 }
 ```
-### PUT api/topics/:id
+## PUT api/topics/:id
 
 Atnaujina temos aprašą.
 
@@ -207,9 +275,9 @@ Status 200
     "creationDate": "2023-11-28T17:05:29.7266917Z"
 }
 ```
-### DELETE api/topics/:id
+## DELETE api/topics/:id
 
-Atnaujina temos aprašą.
+Ištrina temą.
 
 ### Resurso informacija:
 
