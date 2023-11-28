@@ -110,5 +110,137 @@ Status 200
 ]
 ```
 
+### POST api/topics
 
+Sukuria nauja temą.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | topic id | | 1|
+| name | Yes | topic name| | topic|
+| description | Optional | topic description| | topic about animals|
+| creationDate |  | topic created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+POST https://walrus-app-2r2tj.ondigitalocean.app/api/topics
+```
+### Body
+```http
+{
+    "Name" : "Damn",
+    "Description" : "Intresting"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "id": 59,
+    "name": "Damn",
+    "description": "Intresting",
+    "creationDate": "2023-11-28T17:05:29.7266917Z"
+}
+```
+### PUT api/topics/:id
+
+Atnaujina temos aprašą.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | topic id | | 1|
+| name |  | topic name| | topic|
+| description | Yes | topic description| | topic about animals|
+| creationDate |  | topic created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+PUT https://walrus-app-2r2tj.ondigitalocean.app/api/topics/59
+```
+### Body
+```http
+{
+    "Description" : "Updated description"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "id": 59,
+    "name": "Damn",
+    "Description" : "Updated description"
+    "creationDate": "2023-11-28T17:05:29.7266917Z"
+}
+```
+### DELETE api/topics/:id
+
+Atnaujina temos aprašą.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | topic id | | 1|
+| name |  | topic name| | topic|
+| description |  | topic description| | topic about animals|
+| creationDate |  | topic created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+DELETE https://walrus-app-2r2tj.ondigitalocean.app/api/topics/59
+```
+
+### Atsakas
+
+```http
+Status 204
+```
 
