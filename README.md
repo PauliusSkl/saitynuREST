@@ -932,3 +932,9 @@ Status 200
 
 
 # Išvados
+
+1. Sukurtas forum API pasinaudojant REST principais su .NET
+2. Duomenų bazei panaudotas PostgresSQL.
+3. Klientinei daliai sukurti panaudotas React.js
+4. Autorizacijai panaudoti JWT tokenai.
+5. Kliento ir serverio dalis yra padėtos debesyje ir prieinamos visiems.
