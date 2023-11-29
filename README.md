@@ -48,7 +48,7 @@ temose bei komentuoti po esamais įrašais. Administratorius moderuotu forumą, 
 ## Technologijos
 
 Front: React  
-Back: .NET 7 + MySqlServer 
+Back: .NET 7 + PostgresSQL 
 
 ## Sistemos architektūra
 ![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/1e7d8d38-4cbf-4497-bc59-6aec7a4f1a5e)
