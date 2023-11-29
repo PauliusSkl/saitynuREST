@@ -567,6 +567,350 @@ DELETE https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/69
 Status 204
 ```
 
+## Komentarai
+
+## GET api/topics/:topicId/posts/:postId/comments
+
+Grąžina specifinio temos įrašo komentarus. Komentarai gražinami po du, puslapiais. Rezultatai gali būti naviguojami su `pageNumber` arba puslapio dydis padidinamas su `pageSize`
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | comment id  | | 8|
+| content |  | Content of the comment| | I liked this |
+| creationDate |  | Comment created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+GET https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments
+```
+
+### Atsakas
+
+```http
+Status 200
+[
+    {
+        "id": 6,
+        "content": "comment content1",
+        "creationDate": "2023-11-23T20:31:47.659806Z"
+    },
+    {
+        "id": 7,
+        "content": "comment content2",
+        "creationDate": "2023-11-23T20:32:16.431262Z"
+    }
+]
+```
+
+## GET api/topics/:topicId/posts/:postId/comments/:commentId
+
+Grąžina specifinį komentarą kaip `resource` ir `links` kurie parodo, ką galima atlikti su resursu.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | comment id | | 8|
+| content |  | Content of the comment| | I liked this |
+| creationDate |  | Comment created date| | 2023-10-17T15:16:45.64501Z|
 
 
+### Pavizdinė užklausa:
+```http
+GET https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments/6
+```
 
+### Atsakas
+
+```http
+Status 200
+{
+    "resource": {
+        "id": 6,
+        "content": "comment content1",
+        "creationDate": "2023-11-23T20:31:47.659806Z"
+    },
+    "links": [
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments/6",
+            "rel": "self",
+            "method": "GET"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments/6",
+            "rel": "UpdateComment",
+            "method": "PUT"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments/6",
+            "rel": "DeleteComment",
+            "method": "DELETE"
+        }
+    ]
+}
+```
+
+## POST api/topics/:topicId/posts/comments
+
+Sukuria nauja komentarą įraše.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | comment id  | | 8|
+| content | Yes | Content of the comment| | I liked this |
+| creationDate |  | Comment created date| | 2023-10-17T15:16:45.64501Z|
+
+
+### Pavizdinė užklausa:
+```http
+POST https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments
+```
+### Body
+```http
+{
+    "Content": "I liked this"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "id": 79,
+    "content": "I liked this",
+    "creationDate": "2023-11-29T09:09:50.95084Z"
+}
+```
+## PUT api/topics/:topicId/posts/:postId/comments/:commentId
+
+Atnaujina komentaro turinį.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | comment id  | | 8|
+| content | Yes | Content of the comment| | I liked this |
+| creationDate |  | Comment created date| | 2023-10-17T15:16:45.64501Z|
+
+
+### Pavizdinė užklausa:
+```http
+PUT https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments/79
+```
+### Body
+```http
+{
+    "Content" : "New Content"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "id": 79,
+    "content": "New Content",
+    "creationDate": "2023-11-29T09:12:03.1274712Z"
+}
+```
+## DELETE api/topics/:topicId/posts/:postId
+
+Ištrina komentarą.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | comment id | | 8|
+| content |  | Content of the comment| | I liked this |
+| creationDate |  | Comment created date| | 2023-10-17T15:16:45.64501Z|
+
+
+### Pavizdinė užklausa:
+```http
+DELETE https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments/79
+```
+
+### Atsakas
+
+```http
+Status 204
+```
+
+
+## Autorizacija
+
+## POST api/register
+
+Užregistruoja nauja naudotoją.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | user id | | 8|
+| userName |  | Name that is used to login| | Tom1 |
+| email |  | User email| | tom@gmail.com |
+| password |  | Password that is used to login| | StrongPassword1! |
+
+
+### Pavizdinė užklausa:
+```http
+GET https://walrus-app-2r2tj.ondigitalocean.app/api/register
+```
+
+### Body
+```http
+{
+    "userName" : "Tom1",
+    "email" : "tom@gmail.com",
+    "password" : "StrongPassword1!"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "id": "3c3544fd-898a-4e4e-b247-5702792f74ba",
+    "username": "Tom1",
+    "email": "tom@gmail.com"
+}
+```
+
+## POST api/topics/Login
+
+Naudoto prisijungimas, gražina JWT tokenas kuris toliau naudojamas autorizacijai.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | user id | | 8|
+| userName |  | Name that is used to login| | Tom1 |
+| email |  | User email| | tom@gmail.com |
+| password |  | Password that is used to login| | StrongPassword1! |
+
+### Pavizdinė užklausa:
+```http
+POST https://walrus-app-2r2tj.ondigitalocean.app/api/login
+```
+### Body
+```http
+{
+    "userName" : "Tom1",
+    "password" : "StrongPassword1!"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUGF1bGl1czYiLCJqdGkiOiI5YzYxODRhYS01YmNhLTQwZGYtOWY2My0zZDllNWFlZDFkOGMiLCJzdWIiOiJiZDk2ZmYwOS00ODAzLTQyZjQtYTQzNC0yNWI3ZTVlOGQ2MTgiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJyZWdpc3RlcmVkVXNlciIsImV4cCI6MTcwMTI1MTk3OCwiaXNzIjoiUGF1bGl1cyIsImF1ZCI6IlRydXN0ZWRDbGllbnQifQ.rm2WnVO6OvLpjN1E5lTL6bfUBEU1S0qTsLhNP3LpT7w"
+}
+```
+
+
+# Išvados
