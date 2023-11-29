@@ -312,3 +312,261 @@ DELETE https://walrus-app-2r2tj.ondigitalocean.app/api/topics/59
 Status 204
 ```
 
+
+## Įrašai
+
+## GET api/topics/:topicId/posts
+
+Grąžina specifinės temos įrašus. Įrašai gražinami po du, puslapiais. Rezultatai gali būti naviguojami su `pageNumber` arba puslapio dydis padidinamas su `pageSize`
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | post id | | 8|
+| name |  | post name| | post about topic|
+| body |  | post body, content| | This topic is intresting |
+| creationDate |  | post created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+GET https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts
+```
+
+### Atsakas
+
+```http
+Status 200
+[
+    {
+        "id": 8,
+        "name": "post1",
+        "body": "post body",
+        "creationDate": "2023-11-20T18:09:22.247045Z"
+    },
+    {
+        "id": 10,
+        "name": "post2",
+        "body": "post body",
+        "creationDate": "2023-11-20T18:09:24.857851Z"
+    }
+]
+```
+
+## GET api/topics/:topicId/posts/:postId
+
+Grąžina specifinį įrašą kaip `resource` ir `links` kurie parodo, ką galima atlikti su resursu.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>No</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | post id | | 8|
+| name |  | post name| | post about topic|
+| body |  | post body, content| | This topic is intresting |
+| creationDate |  | post created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+GET https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "resource": {
+        "id": 8,
+        "name": "post1",
+        "body": "post body",
+        "creationDate": "2023-11-20T18:09:22.247045Z"
+    },
+    "links": [
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8",
+            "rel": "self",
+            "method": "GET"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8",
+            "rel": "DeletePost",
+            "method": "DELETE"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8",
+            "rel": "UpdatePost",
+            "method": "PUT"
+        },
+        {
+            "href": "http://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/8/comments",
+            "rel": "GetComments",
+            "method": "GET"
+        }
+    ]
+}
+```
+
+## POST api/topics/:topicId/posts
+
+Sukuria nauja įrašą temoje.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | post id | | 8|
+| name | Yes | post name| | post about topic|
+| body | Optional | post body, content| | This topic is intresting |
+| creationDate |  | post created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+POST https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts
+```
+### Body
+```http
+{
+    "Name" : "Funny joke",
+    "Body" : "Joke body"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "id": 69,
+    "name": "Funny joke",
+    "body": "Joke body",
+    "creationDate": "2023-11-29T08:59:41.1298579Z"
+}
+```
+## PUT api/topics/:topicId/posts/:postId
+
+Atnaujina įrašo turinį.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | post id | | 8|
+| name |  | post name| | post about topic|
+| body | Yes | post body, content| | This topic is intresting |
+| creationDate |  | post created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+PUT https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/69
+```
+### Body
+```http
+{
+    "body" : "New body"
+}
+```
+
+### Atsakas
+
+```http
+Status 200
+{
+    "id": 69,
+    "name": "Funny joke",
+    "body": "New body",
+    "creationDate": "2023-11-29T08:59:41.129857Z"
+}
+```
+## DELETE api/topics/:topicId/posts/:postId
+
+Ištrina įrašą.
+
+### Resurso informacija:
+
+<table>
+  <tr>
+    <td>Response format</td>
+    <td>JSON</td>
+  </tr>
+  <tr>
+    <td>Requires authentication?</td>
+    <td>Yes</td>
+  </tr>
+</table>
+
+### Parametrai:
+
+| Name | Required | Description | Default value | Example |
+| --- | --- | --- | --- | --- |
+| id |  | post id | | 8|
+| name |  | post name| | post about topic|
+| body | | post body, content| | This topic is intresting |
+| creationDate |  | post created date| | 2023-10-17T15:16:45.64501Z|
+
+### Pavizdinė užklausa:
+```http
+DELETE https://walrus-app-2r2tj.ondigitalocean.app/api/topics/2/posts/69
+```
+
+### Atsakas
+
+```http
+Status 204
+```
+
+
+
+
