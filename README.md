@@ -56,6 +56,25 @@ Back: .NET 7 + MySqlServer
 
 ![image](https://github.com/PauliusSkl/saitynuREST/assets/99750713/a8a50bcb-5698-471d-9237-79e4fd3d87ba)
 
+# Naudotojo sąsaja
+
+## Temų puslapio wireframe
+
+![Topic](https://github.com/PauliusSkl/saitynuREST/assets/99750713/0324f000-24be-45bd-9558-77bb58aa74e2)
+
+## Temų puslapis
+
+![946be42243a8ed9d8ebf8c1410f4dc8a](https://github.com/PauliusSkl/saitynuREST/assets/99750713/f1b26441-f35a-4689-81a2-fadc519efd74)
+
+## Įrašo/Komentaro puslapio wireframe
+
+![comment](https://github.com/PauliusSkl/saitynuREST/assets/99750713/75e8bfe1-8472-4442-ba95-741f3c94fec8)
+
+## Įrašo/Komentaro puslapis
+
+![ecfb23a39932e9ca88753cced5ad9283](https://github.com/PauliusSkl/saitynuREST/assets/99750713/6644fac6-d9f6-408c-8b0e-2cd86bce1b78)
+
+
 
 # API specifikacija
 
@@ -867,7 +886,7 @@ Status 200
 
 ## POST api/topics/Login
 
-Naudoto prisijungimas, gražina JWT tokenas kuris toliau naudojamas autorizacijai.
+Naudoto prisijungimas, gražina JWT tokeną kuris toliau naudojamas autorizacijai.
 
 ### Resurso informacija:
 
