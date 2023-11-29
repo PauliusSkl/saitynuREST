@@ -44,7 +44,6 @@ temose bei komentuoti po esamais įrašais. Administratorius moderuotu forumą, 
 ### Administratorius galės:
 
 1. Šalinti bet kokia temą, įrašą, komentarą.
-2. Šalinti naudotojus.
 
 ## Technologijos
 
