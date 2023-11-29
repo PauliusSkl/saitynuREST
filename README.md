@@ -73,6 +73,21 @@ Back: .NET 7 + MySqlServer
 
 ![ecfb23a39932e9ca88753cced5ad9283](https://github.com/PauliusSkl/saitynuREST/assets/99750713/6644fac6-d9f6-408c-8b0e-2cd86bce1b78)
 
+## Formu wireframe
+
+![bd65bd13ec3ba8aa9a905535110528fa](https://github.com/PauliusSkl/saitynuREST/assets/99750713/c292b497-89a1-4d50-8cd2-9b8c0e935270)
+
+## Formos
+
+![c51e7225e17cb641ea71b6cbe12cd42e](https://github.com/PauliusSkl/saitynuREST/assets/99750713/61589ceb-4be7-4cd1-bb4e-d2392245312b)
+
+
+![16434524f67f1451719b74e2986be548](https://github.com/PauliusSkl/saitynuREST/assets/99750713/0bd7d967-073f-493b-a881-aabfa66bc19a)
+
+![6727c5d3b160bfe6b489608ac25c7917](https://github.com/PauliusSkl/saitynuREST/assets/99750713/5078330f-ab38-410f-960a-d5089f561cc4)
+
+
+
 
 
 # API specifikacija
